@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guess Game</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+
+    <style>
+        @media (min-width: 0px) {
+            body{
+        font-family: "Montserrat", sans-serif;
+        font-optical-sizing: auto;
+        font-weight: 700;
+        font-style: normal; 
+        background-size:cover;
+        background-image: url(./small-screen.jpg);
+        align-items: center;
+        text-align: center;
+        }   
+        .container{
+        max-width: 300px;
+        margin: 150px auto;
+        padding: 20px;
+        background-color: rgba(129, 129, 129, 0.687);
+        border-radius: 10px;
+        }
+        input[type="number"]{
+            font-family: "Montserrat", sans-serif;
+            font-weight: 400;
+            font-style: italic;
+            margin-bottom: 20px ;
+            width: 100%;
+            padding: 8px;
+            border: 1px solid white;
+            border-radius: 8px;
+        }
+        button{
+            font-family: "Montserrat", sans-serif;
+            font-weight: 400;
+            color: rgb(72, 71, 71);
+            width: 25%;
+            background-color: rgb(4, 221, 0);
+            padding: 8px;
+            border: 1px solid white;
+            border-radius: 8px;
+            
+        }
+        button:hover{
+            background-color:rgba(4, 255, 0, 0.952) ;
+        }
+    }
+        @media (min-width: 848px){
+        body{
+        font-family: "Montserrat", sans-serif;
+        font-optical-sizing: auto;
+        font-weight: 700;
+        font-style: normal; 
+        background-size:cover;
+        background-image: url(./big-screen.jpg);
+           
+        }
+        .container{
+        max-width: 300px;
+        margin: 100px auto;
+        padding: 20px;
+        background-color: rgba(128, 128, 128, 0.386);
+        border-radius: 10px;
+        }
+        input[type="number"]{
+            font-family: "Montserrat", sans-serif;
+            font-weight: 400;
+            font-style: italic;
+            margin-bottom: 20px ;
+            width: 100%;
+            padding: 8px;
+            border: 1px solid white;
+            border-radius: 8px;
+        }
+        button{
+            font-family: "Montserrat", sans-serif;
+            font-weight: 400;
+            color: rgb(72, 71, 71);
+            width: 25%;
+            background-color: rgb(4, 221, 0);
+            padding: 8px;
+            border: 1px solid white;
+            border-radius: 8px;
+            
+        }
+        button:hover{
+            background-color:rgba(4, 255, 0, 0.952) ;
+        }
+    }
+        </style>
+
+</head>
+<body>
+    <div class="background">
+    <div class="container">
+        <h1>Guess the Number between 1 to 100</h1>
+        <div id="GuessInput">
+            <input type="number" id="input" placeholder="Enter your Number" required>
+            <br>
+            <button type="submit" id="btn"> Guess</button>
+            <p id="result"></p>
+            <p id="Attempt"> No. Of Guess: 0</p>
+        </div>
+    </div>
+</div>
+
+    <script>
+        let input=document.getElementById('input')
+        let btn=document.getElementById('btn')
+        let attempt=document.getElementById('Attempt')
+        let result=document.getElementById('result')
+
+        let myNum=Math.floor(Math.random()*100)+1;
+        console.log(myNum);
+        let count=0;
+
+        btn.addEventListener('click',()=>{
+            guessNum();
+        })
+
+        function guessNum(){
+            if(input.value<1 || input.value>100 || isNaN(input.value)){
+                result.innerHTML="Enter between 1 to 100";
+            }else if(input.value==myNum){
+                count++;
+                result.innerHTML=`You have guessed correctly = ${myNum}`;
+                attempt.innerHTML=`No. Of Guess:${count}`
+                btn.Disabled =true;
+                setTimeout(()=>{
+                    resetGame();
+                }
+            )
+
+            }else if(input.value<myNum){
+                count++;
+                result.innerHTML=`Your guess is low`;
+                attempt.innerHTML=`No. Of Guess:${count}`
+            }else if(input.value>myNum){
+                count++;
+                result.innerHTML=`Your guess is high`;
+                attempt.innerHTML=`No. Of Guess:${count}`
+            }
+        }
+
+        function resetGame(){
+            count=0;
+            myNum=Math.floor(Math.random()*100)+1;
+            input.value=""
+            attempt.innerHTML=`No. Of Guess:${count}`
+        }
+
+
+    </script>
+</body>
+</html>
